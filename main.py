@@ -3,6 +3,10 @@ import os
 from flask import Flask, request
 
 TOKEN = os.getenv("7566708504:AAGfJ0IVUHQirgnePd3leIiG7M83hFGm5yc")
+
+if not TOKEN:
+    raise ValueError("Ошибка: Токен не найден в переменных окружения!")
+
 bot = telebot.TeleBot(TOKEN)
 
 app = Flask(__name__)
