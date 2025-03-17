@@ -1,23 +1,24 @@
 import telebot
+import os
 from flask import Flask, request
 
-TOKEN = "7566708504:AAGfJ0IVUHQirgnePd3leIiG7M83hFGm5yc"
+TOKEN = os.getenv("7566708504:AAGfJ0IVUHQirgnePd3leIiG7M83hFGm5yc")
 bot = telebot.TeleBot(TOKEN)
+
 app = Flask(__name__)
 
-@app.route('/' + TOKEN, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "OK", 200
-
-@app.route("/")
+@app.route(f"/{TOKEN}", methods=["POST"])
 def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://ТВОЙ_RAILWAY_URL/" + TOKEN)
-    return "Webhook set!", 200
+    json_str = request.get_data().decode("UTF-8")
+    update = telebot.types.Update.de_json(json_str)
+    bot.process_new_updates([update])
+    return "!", 200
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=["start"])
 def start(message):
-    bot.send_message(message.chat.id, "привет, я крипер и меня надо тапать йоу @HELLKYXX")
+    bot.send_message(message.chat.id, "Привет! Бот работает.")
 
-bot.polling()
+if __name__ == "__main__":
+    bot.remove_webhook()
+    bot.set_webhook(url=f"https://govno-3gfn.onrender.com/{TOKEN}")
+    app.run(host="0.0.0.0", port=5000)
