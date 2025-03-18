@@ -29,4 +29,5 @@ def start(message):
 def info_callback(call):
     bot.send_message(call.message.chat.id, "by: @HELLKYXX")
 
+bot.remove_webhook()
 bot.polling()
