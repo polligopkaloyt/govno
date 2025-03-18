@@ -2,7 +2,6 @@ from flask import Flask, request
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
-import threading
 
 TOKEN = os.getenv("TOKEN")
 bot = telebot.TeleBot(TOKEN)
@@ -25,13 +24,13 @@ def start(message):
     markup = InlineKeyboardMarkup()
     
     # Кнопка "Играть"
-    play_button = InlineKeyboardButton("🎮 Играть", web_app={"url": "https://polligopkaloyt.github.io/creeper.github.io/"})
+    play_button = InlineKeyboardButton("🎮 играть", web_app={"url": "https://polligopkaloyt.github.io/creeper.github.io/"})
     
     # Кнопка "Информация"
-    info_button = InlineKeyboardButton("ℹ Информация", callback_data="info")
+    info_button = InlineKeyboardButton("ℹ информация", callback_data="info")
     
     # Кнопка "Поддержка"
-    support_button = InlineKeyboardButton("👥 Поддержка", url="https://t.me/C_T_P_A_XX")
+    support_button = InlineKeyboardButton("👥 поддержка", url="https://t.me/C_T_P_A_XX")
     
     # Добавляем кнопки в разметку
     markup.add(play_button)
@@ -44,11 +43,7 @@ def start(message):
 def info_callback(call):
     bot.send_message(call.message.chat.id, "by: @HELLKYXX")
 
-def start_bot():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://govno-3gfn.onrender.com/" + TOKEN)
-    bot.infinity_polling()
-
 if __name__ == "__main__":
-    threading.Thread(target=start_bot, daemon=True).start()
-    app.run(host="0.0.0.0", port=10000)  # Открываем порт 10000
+    bot.remove_webhook()  
+    bot.set_webhook(url=f"https://govno-3gfn.onrender.com/{TOKEN}")  # Webhook без polling
+    app.run(host="0.0.0.0", port=10000)  # Flask сервер на порту 10000
