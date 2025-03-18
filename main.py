@@ -47,7 +47,7 @@ def info_callback(call):
     bot.send_message(call.message.chat.id, "by: @HELLKYXX")
 
 if __name__ == "__main__":
-    bot.remove_webhook()
-    bot.set_webhook(url=f"https://govno-3gfn.onrender.com/{TOKEN}")  # Устанавливаем Webhook
-    print("==> Webhook установлен!")  # 🔴 ОТЛАДКА
+    bot.remove_webhook()  # Только удаляем Webhook, без установки!
+    print("==> Webhook удален!")
     app.run(host="0.0.0.0", port=10000)
+
