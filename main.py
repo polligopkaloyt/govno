@@ -1,3 +1,4 @@
+from flask import Flask
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
@@ -31,3 +32,14 @@ def info_callback(call):
 
 bot.remove_webhook()
 bot.polling()
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "бот запущен"
+
+if __name__ == "__main__":
+    bot.remove_webhook()
+    bot.set_webhook(url="https://govno-3gfn.onrender.com/")
+    app.run(host="0.0.0.0", port=10000)  # Открываем порт 10000
+
