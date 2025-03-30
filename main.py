@@ -8,7 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.context import FSMContext
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-TOKEN = "8070823925:AAHCI22gXmHzp8JDm8V9hHYkpSqg8_OLQgc" bot = Bot(token=TOKEN) dp = Dispatcher(storage=MemoryStorage()) scheduler = AsyncIOScheduler() users = {}
+TOKEN = "8070823925:AAHCI22gXmHzp8JDm8V9hHYkpSqg8_OLQgc"
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
