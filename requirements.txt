@@ -1,4 +1,2 @@
-pyTelegramBotAPI
-flask
-gunicorn
-telebot
+aiogram==3.0.0  
+apscheduler==3.10.1
